@@ -16,13 +16,13 @@ if [ ! -f "$BIN_DIR/opencode.bak" ]; then
 fi
 
 log_info "创建启动脚本..."
-cat > "$INSTALL_DIR/opencode" << 'LAUNCHER_EOF'
+cat > "$BIN_DIR/opencode" << 'LAUNCHER_EOF'
 #!/bin/bash
 # OpenCode Launcher - 基于 opencode-on-centos7 方案修复版
 set -e
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-OPENCODE_DIR="${HOME}/.opencode"
+OPENCODE_DIR="$(dirname "$SCRIPT_DIR")"
 
 # 检查安装目录
 if [[ ! -d "$OPENCODE_DIR" ]]; then
@@ -113,10 +113,10 @@ fi
 exit $RETURN_CODE
 LAUNCHER_EOF
 
-chmod +x "$INSTALL_DIR/opencode"
+chmod +x "$BIN_DIR/opencode"
 
 log_info "测试运行..."
-if "$INSTALL_DIR/opencode" --version &> /dev/null; then
+if "$BIN_DIR/opencode" --version &> /dev/null; then
     log_success "安装完成！"
     echo ""
     echo "使用方法：$INSTALL_DIR/opencode"

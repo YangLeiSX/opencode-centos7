@@ -36,10 +36,10 @@ OPENCODE_INSTALL_DIR=$HOME/.opencode bash install-block.sh
 
 ```bash
 # 运行 OpenCode
-~/.opencode/opencode
+~/.opencode/bin/opencode
 
-# 添加到 PATH
-echo 'export PATH=$HOME/.opencode:$PATH' >> ~/.bashrc
+# 添加到 PATH（推荐）
+echo 'export PATH=$HOME/.opencode/bin:$PATH' >> ~/.bashrc
 source ~/.bashrc
 opencode
 ```
@@ -60,15 +60,15 @@ my_install/
 │   ├── 04-build-patchelf.sh   # 编译 patchelf
 │   ├── 05-install-opencode.sh # 安装并备份 opencode
 │   └── 06-create-launcher.sh  # 生成启动脚本
-└── deps/                  # 源码和编译目录（安装后可删除）
+└── deps/                  # 源码和编译目录（安装完成后可删除，但删除后无法重新运行安装脚本进行验证/修复）
 ```
 
 ### 安装后结构
 
 ```
 ~/.opencode/
-├── opencode               # 启动脚本（入口）
 ├── bin/
+│   ├── opencode           # 启动脚本（入口）
 │   └── opencode.bak       # 原始 opencode 备份
 ├── gnu/                   # 自定义 glibc 2.31 + GCC 运行库
 │   ├── bin/
@@ -79,7 +79,7 @@ my_install/
 │   │   └── ...
 │   └── lib64/
 │       └── libgcc_s.so.1
-└── deps/                  # 编译临时文件（可安全删除）
+└── deps/                  # 编译临时文件（安装完成后可删除，但删除后无法重新运行安装脚本进行验证/修复）
     ├── gcc-9.5.0/
     ├── glibc-2.31/
     ├── patchelf/
