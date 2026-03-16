@@ -52,7 +52,6 @@ opencode
 my_install/
 ├── common.sh              # 公共函数库（日志输出）
 ├── install-block.sh       # 主安装入口
-├── launcher.sh            # 启动脚本模板（已嵌入到 06-create-launcher.sh）
 ├── scripts/
 │   ├── 01-check-deps.sh   # 检查系统依赖
 │   ├── 02-build-gcc.sh    # 编译 GCC 9.5.0
@@ -70,22 +69,15 @@ my_install/
 ├── bin/
 │   ├── opencode           # 启动脚本（入口）
 │   └── opencode.bak       # 原始 opencode 备份
-├── gnu/                   # 自定义 glibc 2.31 + GCC 运行库
-│   ├── bin/
-│   │   └── patchelf
-│   ├── lib/
-│   │   ├── ld-linux-x86-64.so.2  # glibc loader
-│   │   ├── libc.so.6
-│   │   └── ...
-│   └── lib64/
-│       └── libgcc_s.so.1
-└── deps/                  # 编译临时文件（安装完成后可删除，但删除后无法重新运行安装脚本进行验证/修复）
-    ├── gcc-9.5.0/
-    ├── glibc-2.31/
-    ├── patchelf/
-    ├── gcc-build/
-    ├── glibc-build/
-    └── patchelf-build/
+└── gnu/                   # 自定义 glibc 2.31 + GCC 运行库
+    ├── bin/
+    │   └── patchelf
+    ├── lib/
+    │   ├── ld-linux-x86-64.so.2  # glibc loader
+    │   ├── libc.so.6
+    │   └── ...
+    └── lib64/
+        └── libgcc_s.so.1
 ```
 
 ## 安装流程
@@ -138,7 +130,7 @@ my_install/
 mv ~/.opencode ~/my-opencode
 
 # 运行
-~/my-opencode/opencode
+~/my-opencode/bin/opencode
 ```
 
 **注意**：移动后直接运行新位置的启动脚本即可，无需重新安装。
@@ -229,7 +221,7 @@ sudo yum install -y gmp-devel mpfr-devel libmpc-devel
 **解决**：确保用启动脚本运行：
 ```bash
 # ✅ 正确
-~/.opencode/opencode
+~/.opencode/bin/opencode
 ```
 
 ### 3. TUI 按键无响应
