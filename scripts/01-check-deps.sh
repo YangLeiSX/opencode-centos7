@@ -8,7 +8,7 @@ source "$SCRIPT_DIR/../common.sh"  # 公共函数（颜色输出等）
 log_step "步骤 1: 检查系统依赖"
 
 # 检查基本工具
-REQUIRED_TOOLS="wget tar gzip make"
+REQUIRED_TOOLS="wget tar gzip make bison"
 for tool in $REQUIRED_TOOLS; do
     if ! command -v "$tool" &> /dev/null; then
         log_error "缺少必要工具：$tool"
